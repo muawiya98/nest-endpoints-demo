@@ -3,9 +3,10 @@ import { GreetModule } from './greet/greet.module';
 import { TimeModule } from './time/time.module';
 import { SecureModule } from './secure/secure.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { CatsModule } from './cats/cats.module';
 
 @Module({
-  imports: [GreetModule, TimeModule, SecureModule],
+  imports: [GreetModule, TimeModule, SecureModule, CatsModule],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
