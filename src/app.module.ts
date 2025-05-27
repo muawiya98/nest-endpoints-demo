@@ -1,4 +1,4 @@
-import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { Module, RequestMethod, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { GreetModule } from './greet/greet.module';
 import { TimeModule } from './time/time.module';
 import { SecureModule } from './secure/secure.module';
@@ -8,10 +8,10 @@ import { CatsModule } from './cats/cats.module';
 @Module({
   imports: [GreetModule, TimeModule, SecureModule, CatsModule],
 })
-export class AppModule {
+export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      .forRoutes('secure'); // Only applies to /secure
+      .forRoutes({ path: 'cats', method: RequestMethod.GET });
   }
 }
